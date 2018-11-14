@@ -11,7 +11,8 @@ namespace Jansenautos.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class AspNetRoles
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,7 +20,9 @@ namespace Jansenautos.Models
         {
             this.AspNetUsers = new HashSet<AspNetUsers>();
         }
-    
+
+        [Key]
+
         public string Id { get; set; }
         public string Name { get; set; }
     

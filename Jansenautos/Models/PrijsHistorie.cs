@@ -11,9 +11,11 @@ namespace Jansenautos.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class PrijsHistorie
     {
+        [Key]
         public int prijsCategorieId { get; set; }
         public int categorieId { get; set; }
         public System.DateTime beginDatum { get; set; }
