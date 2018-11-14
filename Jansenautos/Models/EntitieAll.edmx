@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="JansenautosModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="JansenautosModel1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="__MigrationHistory">
           <Key>
             <PropertyRef Name="MigrationId" />
@@ -99,13 +99,14 @@
           <Property Name="tussenvoegsel" Type="varchar" MaxLength="50" />
           <Property Name="achternaam" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="afkorting" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="Actief" Type="bit" />
         </EntityType>
         <EntityType Name="PrijsHistorie">
           <Key>
-            <PropertyRef Name="prijsCategorieId" />
+            <PropertyRef Name="prijsCaterieId" />
           </Key>
-          <Property Name="prijsCategorieId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="categorieId" Type="int" Nullable="false" />
+          <Property Name="prijsCaterieId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="caterieId" Type="int" Nullable="false" />
           <Property Name="beginDatum" Type="date" Nullable="false" />
           <Property Name="eindDatum" Type="date" />
           <Property Name="prijsPerDag" Type="money" Nullable="false" />
@@ -117,7 +118,7 @@
           <Property Name="VerhuurId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="klantId" Type="int" Nullable="false" />
           <Property Name="kenteken" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="medewerkerId" Type="int" />
+          <Property Name="medewerkerId" Type="int" Nullable="false" />
           <Property Name="beginDatum" Type="date" Nullable="false" />
           <Property Name="eindDatum" Type="date" Nullable="false" />
           <Property Name="afgehandeld" Type="bit" Nullable="false" />
@@ -127,9 +128,11 @@
             <PropertyRef Name="kenteken" />
           </Key>
           <Property Name="kenteken" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="categorieId" Type="int" Nullable="false" />
+          <Property Name="caterieId" Type="int" Nullable="false" />
           <Property Name="merk" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="type" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Voertuigactief" Type="bit" />
+          <Property Name="url" Type="varchar" MaxLength="255" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
@@ -187,18 +190,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_PrijsHistorie_Categorie">
-          <End Role="Categorie" Type="Self.Categorie" Multiplicity="1" />
-          <End Role="PrijsHistorie" Type="Self.PrijsHistorie" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Categorie">
-              <PropertyRef Name="categorieId" />
-            </Principal>
-            <Dependent Role="PrijsHistorie">
-              <PropertyRef Name="categorieId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Verhuren_Klanten">
           <End Role="Klanten" Type="Self.Klanten" Multiplicity="1" />
           <End Role="Verhuren" Type="Self.Verhuren" Multiplicity="*" />
@@ -212,7 +203,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Verhuren_Medewerkers">
-          <End Role="Medewerkers" Type="Self.Medewerkers" Multiplicity="0..1" />
+          <End Role="Medewerkers" Type="Self.Medewerkers" Multiplicity="1" />
           <End Role="Verhuren" Type="Self.Verhuren" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Medewerkers">
@@ -232,18 +223,6 @@
             </Principal>
             <Dependent Role="Verhuren">
               <PropertyRef Name="kenteken" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Voertuigen_Categorie">
-          <End Role="Categorie" Type="Self.Categorie" Multiplicity="1" />
-          <End Role="Voertuigen" Type="Self.Voertuigen" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Categorie">
-              <PropertyRef Name="categorieId" />
-            </Principal>
-            <Dependent Role="Voertuigen">
-              <PropertyRef Name="categorieId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -276,10 +255,6 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
           </AssociationSet>
-          <AssociationSet Name="FK_PrijsHistorie_Categorie" Association="Self.FK_PrijsHistorie_Categorie">
-            <End Role="Categorie" EntitySet="Categorie" />
-            <End Role="PrijsHistorie" EntitySet="PrijsHistorie" />
-          </AssociationSet>
           <AssociationSet Name="FK_Verhuren_Klanten" Association="Self.FK_Verhuren_Klanten">
             <End Role="Klanten" EntitySet="Klanten" />
             <End Role="Verhuren" EntitySet="Verhuren" />
@@ -292,13 +267,8 @@
             <End Role="Voertuigen" EntitySet="Voertuigen" />
             <End Role="Verhuren" EntitySet="Verhuren" />
           </AssociationSet>
-          <AssociationSet Name="FK_Voertuigen_Categorie" Association="Self.FK_Voertuigen_Categorie">
-            <End Role="Categorie" EntitySet="Categorie" />
-            <End Role="Voertuigen" EntitySet="Voertuigen" />
-          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="JansenautosModel1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -398,10 +368,12 @@
           <Property Name="achternaam" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="afkorting" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Verhuren" Relationship="Self.FK_Verhuren_Medewerkers" FromRole="Medewerkers" ToRole="Verhuren" />
+          <Property Name="Actief" Type="Boolean" />
         </EntityType>
         <EntityType Name="PrijsHistorie">
           <Key>
             <PropertyRef Name="prijsCategorieId" />
+            <PropertyRef Name="prijsCaterieId" />
           </Key>
           <Property Name="prijsCategorieId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="categorieId" Type="Int32" Nullable="false" />
@@ -409,6 +381,8 @@
           <Property Name="eindDatum" Type="DateTime" Precision="0" />
           <Property Name="prijsPerDag" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
           <NavigationProperty Name="Categorie" Relationship="Self.FK_PrijsHistorie_Categorie" FromRole="PrijsHistorie" ToRole="Categorie" />
+          <Property Name="prijsCaterieId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="caterieId" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Verhuren">
           <Key>
@@ -417,7 +391,7 @@
           <Property Name="VerhuurId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="klantId" Type="Int32" Nullable="false" />
           <Property Name="kenteken" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="medewerkerId" Type="Int32" />
+          <Property Name="medewerkerId" Type="Int32" Nullable="false" />
           <Property Name="beginDatum" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="eindDatum" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="afgehandeld" Type="Boolean" Nullable="false" />
@@ -435,6 +409,9 @@
           <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Categorie" Relationship="Self.FK_Voertuigen_Categorie" FromRole="Voertuigen" ToRole="Categorie" />
           <NavigationProperty Name="Verhuren" Relationship="Self.FK_Verhuren_Voertuigen" FromRole="Voertuigen" ToRole="Verhuren" />
+          <Property Name="caterieId" Type="Int32" Nullable="false" />
+          <Property Name="Voertuigactief" Type="Boolean" />
+          <Property Name="url" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
@@ -663,6 +640,7 @@
           <EntitySetMapping Name="Medewerkers">
             <EntityTypeMapping TypeName="JansenautosModel1.Medewerkers">
               <MappingFragment StoreEntitySet="Medewerkers">
+                <ScalarProperty Name="Actief" ColumnName="Actief" />
                 <ScalarProperty Name="medewerkerId" ColumnName="medewerkerId" />
                 <ScalarProperty Name="voornaam" ColumnName="voornaam" />
                 <ScalarProperty Name="tussenvoegsel" ColumnName="tussenvoegsel" />
@@ -674,8 +652,8 @@
           <EntitySetMapping Name="PrijsHistorie">
             <EntityTypeMapping TypeName="JansenautosModel1.PrijsHistorie">
               <MappingFragment StoreEntitySet="PrijsHistorie">
-                <ScalarProperty Name="prijsCategorieId" ColumnName="prijsCategorieId" />
-                <ScalarProperty Name="categorieId" ColumnName="categorieId" />
+                <ScalarProperty Name="caterieId" ColumnName="caterieId" />
+                <ScalarProperty Name="prijsCaterieId" ColumnName="prijsCaterieId" />
                 <ScalarProperty Name="beginDatum" ColumnName="beginDatum" />
                 <ScalarProperty Name="eindDatum" ColumnName="eindDatum" />
                 <ScalarProperty Name="prijsPerDag" ColumnName="prijsPerDag" />
@@ -698,8 +676,10 @@
           <EntitySetMapping Name="Voertuigen">
             <EntityTypeMapping TypeName="JansenautosModel1.Voertuigen">
               <MappingFragment StoreEntitySet="Voertuigen">
+                <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="Voertuigactief" ColumnName="Voertuigactief" />
+                <ScalarProperty Name="caterieId" ColumnName="caterieId" />
                 <ScalarProperty Name="kenteken" ColumnName="kenteken" />
-                <ScalarProperty Name="categorieId" ColumnName="categorieId" />
                 <ScalarProperty Name="merk" ColumnName="merk" />
                 <ScalarProperty Name="type" ColumnName="type" />
               </MappingFragment>

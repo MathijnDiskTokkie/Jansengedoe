@@ -11,9 +11,11 @@ namespace Jansenautos.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Verhuren
     {
+        [Key]
         public int VerhuurId { get; set; }
         public int klantId { get; set; }
         public string kenteken { get; set; }

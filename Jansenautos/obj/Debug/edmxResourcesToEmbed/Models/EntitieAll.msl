@@ -85,6 +85,7 @@
     <EntitySetMapping Name="Medewerkers">
       <EntityTypeMapping TypeName="JansenautosModel1.Medewerkers">
         <MappingFragment StoreEntitySet="Medewerkers">
+          <ScalarProperty Name="Actief" ColumnName="Actief" />
           <ScalarProperty Name="medewerkerId" ColumnName="medewerkerId" />
           <ScalarProperty Name="voornaam" ColumnName="voornaam" />
           <ScalarProperty Name="tussenvoegsel" ColumnName="tussenvoegsel" />
@@ -96,8 +97,8 @@
     <EntitySetMapping Name="PrijsHistorie">
       <EntityTypeMapping TypeName="JansenautosModel1.PrijsHistorie">
         <MappingFragment StoreEntitySet="PrijsHistorie">
-          <ScalarProperty Name="prijsCategorieId" ColumnName="prijsCategorieId" />
-          <ScalarProperty Name="categorieId" ColumnName="categorieId" />
+          <ScalarProperty Name="caterieId" ColumnName="caterieId" />
+          <ScalarProperty Name="prijsCaterieId" ColumnName="prijsCaterieId" />
           <ScalarProperty Name="beginDatum" ColumnName="beginDatum" />
           <ScalarProperty Name="eindDatum" ColumnName="eindDatum" />
           <ScalarProperty Name="prijsPerDag" ColumnName="prijsPerDag" />
@@ -120,8 +121,10 @@
     <EntitySetMapping Name="Voertuigen">
       <EntityTypeMapping TypeName="JansenautosModel1.Voertuigen">
         <MappingFragment StoreEntitySet="Voertuigen">
+          <ScalarProperty Name="url" ColumnName="url" />
+          <ScalarProperty Name="Voertuigactief" ColumnName="Voertuigactief" />
+          <ScalarProperty Name="caterieId" ColumnName="caterieId" />
           <ScalarProperty Name="kenteken" ColumnName="kenteken" />
-          <ScalarProperty Name="categorieId" ColumnName="categorieId" />
           <ScalarProperty Name="merk" ColumnName="merk" />
           <ScalarProperty Name="type" ColumnName="type" />
         </MappingFragment>

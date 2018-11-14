@@ -11,7 +11,8 @@ namespace Jansenautos.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Categorie
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,7 +21,8 @@ namespace Jansenautos.Models
             this.PrijsHistorie = new HashSet<PrijsHistorie>();
             this.Voertuigen = new HashSet<Voertuigen>();
         }
-    
+        [Key]
+
         public int categorieId { get; set; }
         public string categorieNaam { get; set; }
         public int aantalPersonen { get; set; }
