@@ -26,7 +26,7 @@
         }
 
 .container.body-content {
-    margin-left: 196px; 
+    margin-left: 196px;
 }
 
 @media screen and (max-height: 450px) {
@@ -59,7 +59,7 @@ ul.nav.navbar-nav.navbar-right {
     }
 
 
-.navbar-inverse .navbar-nav > li > a{
+.navbar-inverse .navbar-nav > li > a {
     color: #fff;
 }
 
