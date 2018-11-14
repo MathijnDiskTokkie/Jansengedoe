@@ -62,12 +62,13 @@ namespace Jansenautos.Models
         public bool RememberMe { get; set; }
     }
 
-    public class RegisterViewModel
+    
+   public class RegisterViewModel
     {
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
-        public string Email { get; set; }
+        public string mail { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
@@ -79,6 +80,36 @@ namespace Jansenautos.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Display(Name = "Voornaam")]
+        public string voornaam { get; set; }
+
+        [Required]
+        [Display(Name = "Achternaam")]
+        public string achternaam { get; set; }
+
+        [Required]
+        [Display(Name = "Adres")]
+        public string adres { get; set; }
+
+        [Required]
+        [Display(Name = "Woonplaats")]
+        public string woonplaats { get; set; }
+
+        [Required]
+        [Display(Name = "Postcode")]
+        public string postcode { get; set; }
+
+
+        [Display(Name = "Tussenvoegsel")]
+        public string tussenvoegsel { get; set; }
+
+        [Display(Name = "telNr")]
+        public string telNr { get; set; }
+
+        [Display(Name = "Wachtwoord")]
+        public string wachtwoord { get; set; }
     }
 
     public class ResetPasswordViewModel
