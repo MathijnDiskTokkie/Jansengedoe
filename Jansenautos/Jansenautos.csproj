@@ -198,43 +198,62 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\KlantensController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\allesmodel.Context.cs">
+    <Compile Include="Models\All.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>allesmodel.Context.tt</DependentUpon>
+      <DependentUpon>All.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\allesmodel.cs">
+    <Compile Include="Models\All.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>allesmodel.tt</DependentUpon>
+      <DependentUpon>All.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\allesmodel.Designer.cs">
+    <Compile Include="Models\All.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>allesmodel.edmx</DependentUpon>
+      <DependentUpon>All.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\EntitieAll.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EntitieAll.Context.tt</DependentUpon>
+    <Compile Include="Models\AspNetRoles.cs">
+      <DependentUpon>All.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\EntitieAll.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EntitieAll.tt</DependentUpon>
+    <Compile Include="Models\AspNetUserClaims.cs">
+      <DependentUpon>All.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\EntitieAll.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>EntitieAll.edmx</DependentUpon>
+    <Compile Include="Models\AspNetUserLogins.cs">
+      <DependentUpon>All.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUsers.cs">
+      <DependentUpon>All.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Categorie.cs">
+      <DependentUpon>All.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\C__MigrationHistory.cs">
+      <DependentUpon>All.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Klanten.cs">
+      <DependentUpon>All.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Medewerkers.cs">
+      <DependentUpon>All.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PrijsHistorie.cs">
+      <DependentUpon>All.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Verhuren.cs">
+      <DependentUpon>All.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Voertuigen.cs">
+      <DependentUpon>All.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -243,48 +262,33 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\golf_new.jpg" />
+    <Content Include="Content\Images\lambo.jpeg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\allesmodel.Context.tt">
+    <Content Include="Models\All.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>allesmodel.edmx</DependentUpon>
-      <LastGenOutput>allesmodel.Context.cs</LastGenOutput>
+      <DependentUpon>All.edmx</DependentUpon>
+      <LastGenOutput>All.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\allesmodel.tt">
+    <Content Include="Models\All.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>allesmodel.edmx</DependentUpon>
-      <LastGenOutput>allesmodel.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\EntitieAll.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EntitieAll.edmx</DependentUpon>
-      <LastGenOutput>EntitieAll.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\EntitieAll.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>EntitieAll.edmx</DependentUpon>
-      <LastGenOutput>EntitieAll.cs</LastGenOutput>
+      <DependentUpon>All.edmx</DependentUpon>
+      <LastGenOutput>All.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EntityDeploy Include="Models\allesmodel.edmx">
+    <EntityDeploy Include="Models\All.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>allesmodel.Designer.cs</LastGenOutput>
+      <LastGenOutput>All.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\allesmodel.edmx.diagram">
-      <DependentUpon>allesmodel.edmx</DependentUpon>
-    </Content>
-    <EntityDeploy Include="Models\EntitieAll.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>EntitieAll.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\EntitieAll.edmx.diagram">
-      <DependentUpon>EntitieAll.edmx</DependentUpon>
+    <Content Include="Models\All.edmx.diagram">
+      <DependentUpon>All.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -332,10 +336,10 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\MenuPartial.cshtml" />
+    <Content Include="Views\Klantens\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\Images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

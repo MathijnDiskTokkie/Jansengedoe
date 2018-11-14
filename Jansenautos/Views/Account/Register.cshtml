@@ -1,9 +1,9 @@
 ﻿@model Jansenautos.Models.RegisterViewModel
 @{
+    /**/
+
     ViewBag.Title = "Register";
 }
-
-<h2>@ViewBag.Title.</h2>
 
 @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
@@ -13,9 +13,9 @@
     <hr />
     @Html.ValidationSummary("", new { @class = "text-danger" })
     <div class="form-group">
-        @Html.LabelFor(m => m.email, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(m => m.mail, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.TextBoxFor(m => m.email, new { @class = "form-control" })
+            @Html.TextBoxFor(m => m.mail, new { @class = "form-control" })
         </div>
     </div>
     <div class="form-group">
@@ -31,9 +31,9 @@
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(m => m.naam, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(m => m.voornaam, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.TextBoxFor(m => m.naam, new { @class = "form-control" })
+            @Html.TextBoxFor(m => m.voornaam, new { @class = "form-control" })
         </div>
     </div>
 
@@ -49,11 +49,10 @@
             @Html.TextBoxFor(m => m.tussenvoegsel, new { @class = "form-control" })
         </div>
     </div>
-
     <div class="form-group">
-        @Html.LabelFor(m => m.straatnaam, new { @class = "col-md-2 control-label" })
+        @Html.LabelFor(m => m.adres, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.TextBoxFor(m => m.straatnaam, new { @class = "form-control" })
+            @Html.TextBoxFor(m => m.adres, new { @class = "form-control" })
         </div>
     </div>
 
@@ -70,30 +69,13 @@
             @Html.TextBoxFor(m => m.postcode, new { @class = "form-control" })
         </div>
     </div>
-    if (ViewContext.HttpContext.User.IsInRole("Manager"))
-    {
-        <div class="form-group">
-            @Html.LabelFor(m => m.medewerkernaam, new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(m => m.medewerkernaam, new { @class = "form-control" })
-            </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.telNr, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.telNr, new { @class = "form-control" })
         </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.medewerkerachternaam, new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(m => m.medewerkerachternaam, new { @class = "form-control" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.winkelcode, new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(m => m.winkelcode, new { @class = "form-control" })
-            </div>
-        </div>
-        @*<div class="form-group">
-                <p>Role Name: @Html.DropDownList("RoleName", (IEnumerable<SelectListItem>)ViewBag.Roles, "Select ...")</p>
-            </div>*@
-    }
+    </div>
+
 
 
     <div class="form-group">
