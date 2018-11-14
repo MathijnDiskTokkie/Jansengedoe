@@ -15,6 +15,8 @@ namespace Jansenautos.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+        private JansenautosEntities entities =  new JansenautosEntities();
+
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -134,15 +136,6 @@ namespace Jansenautos.Controllers
             }
         }
 
-        //
-        // GET: /Account/Register
-        [AllowAnonymous]
-        public ActionResult Register()
-        {
-            return View();
-        }
-
-        //
         // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
@@ -151,12 +144,46 @@ namespace Jansenautos.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.mail, Email = model.mail };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+                    if (User.IsInRole("Manager"))
+                    {
+                        Klanten a = new Klanten();
+                        a.voornaam = model.voornaam;
+                        a.achternaam = model.achternaam;
+                        a.adres = model.adres;
+                        a.mail = model.mail;
+                        model.Password = model.Password;
+                        a.postcode = model.postcode;
+                        a.tussenvoegsel = model.tussenvoegsel;
+                        a.woonplaats = model.woonplaats;
+                        a.telNr = model.telNr;
+
+                        Medewerkers b = new Medewerkers();
+                        
+                        entities.Klanten.Add(a);
+                        entities.Medewerkers.Add(b);
+                        entities.SaveChanges();
+                    }
+                    else
+                    {
+                        Klanten a = new Klanten();
+                        a.voornaam = model.voornaam;
+                        a.achternaam = model.achternaam;
+                        a.adres = model.adres;
+                        a.mail = model.mail;
+                        model.Password = model.Password;
+                        a.postcode = model.postcode;
+                        a.tussenvoegsel = model.tussenvoegsel;
+                        a.woonplaats = model.woonplaats;
+
+                        entities.Klanten.Add(a);
+                        entities.SaveChanges();
+                    }
+
+
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
