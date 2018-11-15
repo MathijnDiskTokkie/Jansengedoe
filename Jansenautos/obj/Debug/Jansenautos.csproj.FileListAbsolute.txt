@@ -1,1 +1,2 @@
+C:\Users\Piratheepa\Documents\Github\Jansengedoe\Jansenautos\obj\Debug\Jansenautos.csprojAssemblyReference.cache
 C:\Users\Piratheepa\Documents\Github\Jansengedoe\Jansenautos\obj\Debug\Jansenautos.csproj.CoreCompileInputs.cache
