@@ -15,7 +15,7 @@ namespace Jansenautos.Controllers
     [Authorize]
     public class AccountController : Controller
     {
-        private JansenautosEntities1 entities =  new JansenautosEntities1();
+        private jansenautosEntities db =  new JansenautosEntities();
 
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
