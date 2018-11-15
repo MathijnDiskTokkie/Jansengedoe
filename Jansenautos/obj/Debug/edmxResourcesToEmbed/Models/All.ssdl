@@ -94,13 +94,14 @@
     <Property Name="tussenvoegsel" Type="varchar" MaxLength="50" />
     <Property Name="achternaam" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="afkorting" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Actief" Type="bit" />
   </EntityType>
   <EntityType Name="PrijsHistorie">
     <Key>
-      <PropertyRef Name="prijsCategorieId" />
+      <PropertyRef Name="prijsCaterieId" />
     </Key>
-    <Property Name="prijsCategorieId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="categorieId" Type="int" Nullable="false" />
+    <Property Name="prijsCaterieId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="caterieId" Type="int" Nullable="false" />
     <Property Name="beginDatum" Type="date" Nullable="false" />
     <Property Name="eindDatum" Type="date" />
     <Property Name="prijsPerDag" Type="money" Nullable="false" />
@@ -112,7 +113,7 @@
     <Property Name="VerhuurId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="klantId" Type="int" Nullable="false" />
     <Property Name="kenteken" Type="varchar" MaxLength="10" Nullable="false" />
-    <Property Name="medewerkerId" Type="int" />
+    <Property Name="medewerkerId" Type="int" Nullable="false" />
     <Property Name="beginDatum" Type="date" Nullable="false" />
     <Property Name="eindDatum" Type="date" Nullable="false" />
     <Property Name="afgehandeld" Type="bit" Nullable="false" />
@@ -122,9 +123,11 @@
       <PropertyRef Name="kenteken" />
     </Key>
     <Property Name="kenteken" Type="varchar" MaxLength="10" Nullable="false" />
-    <Property Name="categorieId" Type="int" Nullable="false" />
+    <Property Name="caterieId" Type="int" Nullable="false" />
     <Property Name="merk" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="type" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Voertuigactief" Type="bit" />
+    <Property Name="url" Type="varchar" MaxLength="255" />
   </EntityType>
   <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
     <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
@@ -182,18 +185,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_PrijsHistorie_Categorie">
-    <End Role="Categorie" Type="Self.Categorie" Multiplicity="1" />
-    <End Role="PrijsHistorie" Type="Self.PrijsHistorie" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Categorie">
-        <PropertyRef Name="categorieId" />
-      </Principal>
-      <Dependent Role="PrijsHistorie">
-        <PropertyRef Name="categorieId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Verhuren_Klanten">
     <End Role="Klanten" Type="Self.Klanten" Multiplicity="1" />
     <End Role="Verhuren" Type="Self.Verhuren" Multiplicity="*" />
@@ -207,7 +198,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Verhuren_Medewerkers">
-    <End Role="Medewerkers" Type="Self.Medewerkers" Multiplicity="0..1" />
+    <End Role="Medewerkers" Type="Self.Medewerkers" Multiplicity="1" />
     <End Role="Verhuren" Type="Self.Verhuren" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Medewerkers">
@@ -227,18 +218,6 @@
       </Principal>
       <Dependent Role="Verhuren">
         <PropertyRef Name="kenteken" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Voertuigen_Categorie">
-    <End Role="Categorie" Type="Self.Categorie" Multiplicity="1" />
-    <End Role="Voertuigen" Type="Self.Voertuigen" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Categorie">
-        <PropertyRef Name="categorieId" />
-      </Principal>
-      <Dependent Role="Voertuigen">
-        <PropertyRef Name="categorieId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -271,10 +250,6 @@
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
     </AssociationSet>
-    <AssociationSet Name="FK_PrijsHistorie_Categorie" Association="Self.FK_PrijsHistorie_Categorie">
-      <End Role="Categorie" EntitySet="Categorie" />
-      <End Role="PrijsHistorie" EntitySet="PrijsHistorie" />
-    </AssociationSet>
     <AssociationSet Name="FK_Verhuren_Klanten" Association="Self.FK_Verhuren_Klanten">
       <End Role="Klanten" EntitySet="Klanten" />
       <End Role="Verhuren" EntitySet="Verhuren" />
@@ -286,10 +261,6 @@
     <AssociationSet Name="FK_Verhuren_Voertuigen" Association="Self.FK_Verhuren_Voertuigen">
       <End Role="Voertuigen" EntitySet="Voertuigen" />
       <End Role="Verhuren" EntitySet="Verhuren" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Voertuigen_Categorie" Association="Self.FK_Voertuigen_Categorie">
-      <End Role="Categorie" EntitySet="Categorie" />
-      <End Role="Voertuigen" EntitySet="Voertuigen" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

@@ -96,10 +96,12 @@
     <Property Name="achternaam" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="afkorting" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="Verhuren" Relationship="Self.FK_Verhuren_Medewerkers" FromRole="Medewerkers" ToRole="Verhuren" />
+    <Property Name="Actief" Type="Boolean" />
   </EntityType>
   <EntityType Name="PrijsHistorie">
     <Key>
       <PropertyRef Name="prijsCategorieId" />
+      <PropertyRef Name="prijsCaterieId" />
     </Key>
     <Property Name="prijsCategorieId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="categorieId" Type="Int32" Nullable="false" />
@@ -107,6 +109,8 @@
     <Property Name="eindDatum" Type="DateTime" Precision="0" />
     <Property Name="prijsPerDag" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
     <NavigationProperty Name="Categorie" Relationship="Self.FK_PrijsHistorie_Categorie" FromRole="PrijsHistorie" ToRole="Categorie" />
+    <Property Name="prijsCaterieId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="caterieId" Type="Int32" Nullable="false" />
   </EntityType>
   <EntityType Name="Verhuren">
     <Key>
@@ -115,7 +119,7 @@
     <Property Name="VerhuurId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="klantId" Type="Int32" Nullable="false" />
     <Property Name="kenteken" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="medewerkerId" Type="Int32" />
+    <Property Name="medewerkerId" Type="Int32" Nullable="false" />
     <Property Name="beginDatum" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="eindDatum" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="afgehandeld" Type="Boolean" Nullable="false" />
@@ -133,6 +137,9 @@
     <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="Categorie" Relationship="Self.FK_Voertuigen_Categorie" FromRole="Voertuigen" ToRole="Categorie" />
     <NavigationProperty Name="Verhuren" Relationship="Self.FK_Verhuren_Voertuigen" FromRole="Voertuigen" ToRole="Verhuren" />
+    <Property Name="caterieId" Type="Int32" Nullable="false" />
+    <Property Name="Voertuigactief" Type="Boolean" />
+    <Property Name="url" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
   </EntityType>
   <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
     <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">

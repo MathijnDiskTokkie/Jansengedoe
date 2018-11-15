@@ -12,7 +12,7 @@ namespace Jansenautos.Controllers
 {
     public class KlantensController : Controller
     {
-        private JansenautosEntities1 db = new JansenautosEntities1();
+        private Jansene db = new JansenautosEntities1();
 
         // GET: Klantens
         public ActionResult Index()
